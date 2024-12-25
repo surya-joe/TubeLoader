@@ -6,7 +6,8 @@ export async function POST(req: Request) {
         console.log('route : ', url, preference, output_path)
         
         const response = await fetch(
-            "http://127.0.0.1:5000/download", 
+            // "http://127.0.0.1:5000/download", 
+            "https://tubeloader.onrender.com",
             {
                 method: "POST",
                 headers: { 'content-type': 'application/json' }, 
