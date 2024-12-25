@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+02_backend/__pycache__/
+02_backend/outputs/
+02_backend/youtube_downloader.py

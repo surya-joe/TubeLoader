@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export async function POST(req: Request) {
     try{
@@ -6,8 +8,7 @@ export async function POST(req: Request) {
         console.log('route : ', url, preference, output_path)
         
         const response = await fetch(
-            // "http://127.0.0.1:5000/download", 
-            "https://tubeloader.onrender.com/download",
+            process.env.RENDER_FLASK_API_URL || "http://127.0.0.1:5000/download",
             {
                 method: "POST",
                 headers: { 'content-type': 'application/json' }, 

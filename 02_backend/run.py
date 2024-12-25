@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from yt_dlp import YoutubeDL 
+from yt_dlp import YoutubeDL
 
 app = Flask(__name__)
 
@@ -9,7 +9,8 @@ def download():
 
     url = data.get('url')
     preference = data.get('preference')
-    output_path = data.get('ouput_path','')
+    output_path = data.get('output_path', '')
+    cookies_file = data.get('cookies_file', '')  # You can specify the cookies file here
 
     if not url:
         return jsonify({"error": "Invalid URL"}), 400
@@ -32,12 +33,15 @@ def download():
     else:
         return jsonify({'error':'Invalid preference'}), 400
     
+    if cookies_file:
+        ydl_opts['cookiefile'] = cookies_file  # Use the cookie file for authentication
+
     try:
         with YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
         return jsonify({'message': 'Download successful.'})
     except Exception as e:
-        return jsonify({'error':str(e)}), 500
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
